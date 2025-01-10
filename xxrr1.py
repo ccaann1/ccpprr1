@@ -1,4 +1,3 @@
-#X-Ray
 import os
 import streamlit as st
 from openai import OpenAI
@@ -98,8 +97,8 @@ st.markdown(
         <div class="menu">
             <a href="https://www.cancepro.com/">Go Home</a>
             <a href="https://canceprochat.streamlit.app/">Ask Me </a>
-            <a href="https://canceproit.pythonanywhere.com/getxray">X-Ray Analysis</a>
-            <a href="https://canceproit.pythonanywhere.com/getliveanalysis">Cancer Research</a>
+            <a href="#">X-Ray Analysis</a>
+            <a href="https://canceproresearch.streamlit.app/">Cancer Research</a>
         </div>
     </div>
     """,

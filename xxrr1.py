@@ -1,3 +1,4 @@
+#X Rays
 import os
 import streamlit as st
 from openai import OpenAI
@@ -38,6 +39,7 @@ st.markdown(
     .navbar .menu {
         float: right;
     }
+    .navbar .menu .active{color:#0099ff;border-bottom:1px solid #0099ff;}
     .navbar .menu a {
         display: inline-block;
     }
@@ -50,7 +52,10 @@ st.markdown(
         .navbar .menu {
             float: none;
         }
+        .notes h3{font-size:18pt;}
     }
+        
+    
     </style>
     """,
     unsafe_allow_html=True
@@ -88,6 +93,7 @@ response = requests.get('https://canceproit.pythonanywhere.com/ttthais')
 data = response.json()
 take_this = data[0]
 
+
 st.markdown(
     """
     <div class="navbar">
@@ -97,7 +103,7 @@ st.markdown(
         <div class="menu">
             <a href="https://www.cancepro.com/">Go Home</a>
             <a href="https://canceprochat.streamlit.app/">Ask Me </a>
-            <a href="#">X-Ray Analysis</a>
+            <a href="#" class="active">X-Ray Analysis</a>
             <a href="https://canceproresearch.streamlit.app/">Cancer Research</a>
         </div>
     </div>
@@ -110,8 +116,18 @@ st.markdown(
 # Show title and description.
 
 st.write(
-    "We have collected information from renowned known Cancer research institutes research documents that are publicly available. Ask a question in the below box, get relevant information."
+    "Analyzing X-Rays is no more harder, ARTIFICIAL INTELLIGENCE is coming soon through CancePro to give accurate analysis over your Medical Diagnostics."
 )
+
+st.markdown(
+    """
+    <div class="navbar">
+        <img src="https://www.cancepro.com/img/xxrr.png" alt="Process">        
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 
 # Ask user for their OpenAI API key via `st.text_input`.
 # Alternatively, you can store the API key in `./.streamlit/secrets.toml` and access it
@@ -124,69 +140,21 @@ st.write(
 #     os.environ["OPENAI_API_KEY"] == st.secrets["abcd_keyyy"]
 # )
 # st.write(st.secrets["abcd_keyyy"])
-os.environ["OPENAI_API_KEY"] = take_this
-api_key = take_this
 
 
-# Create an OpenAI client.
-client = OpenAI()
-
-# Create a session state variable to store the chat messages. This ensures that the
-# messages persist across reruns.
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-
-# Display the existing chat messages via `st.chat_message`.
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+st.write("We are working on huge data to more accurately find the probability of Cancer chances, keep following our Instagram, LinkedIn channels to stay updated with our X-Ray Diagnostic Product.")
 
 
 
-
-
-
-
-# Create a chat input field to allow the user to enter a message. This will display
-# automatically at the bottom of the page.
 st.markdown(
     """
-    <style>
-        div.stTextInput > div > div > input {
-            margin-bottom:0px !important;
-            background-color: transparent; /* This removes the background color */ /* Or you can set a specific color: */ /* background-color: #ffffff; */
-        }
-    </style>
-        """,
+    <div class="notes">
+        <h3>"Expected Launch Date is February 18, 2025."</h3>
+    </div>
+    """,
     unsafe_allow_html=True
+
 )
-
-if prompt := st.chat_input("What is up?"):
-
-    # Store and display the current prompt.
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
-
-    # Generate a response using the OpenAI API.
-    stream = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[
-            {"role": m["role"], "content": m["content"]}
-            for m in st.session_state.messages
-        ],
-        stream=True,
-    )
-   
-    # Stream the response to the chat using `st.write_stream`, then store it in 
-    # session state.
-    with st.chat_message("assistant"):
-        response = st.write_stream(stream)
-    st.session_state.messages.append({"role": "assistant", "content": response})
-
-
-
-
 
 st.markdown(
     """
@@ -197,7 +165,7 @@ st.markdown(
             display: block;
             color: #48c6e0;
             position:relative;
-            bottom:-380px;
+            bottom:0px;
             text-decoration: none;
         }
         .footer-note a:hover {
